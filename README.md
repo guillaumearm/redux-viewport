@@ -4,7 +4,7 @@ redux-viewport
 Keep the browser viewport sync with your redux state.
 
 ### Introduction
-Firs of all, if you want to do reponsive things with React and Redux, take a look at [redux-responsive](https://github.com/AlecAivazis/redux-responsive).
+First of all, if you want to do reponsive things with React and Redux, take a look at [redux-responsive](https://github.com/AlecAivazis/redux-responsive).
 
 #### When use redux-viewport ?
 __redux-viewport__ is designed to dynamically set viewport listeners in your application.
@@ -14,7 +14,9 @@ examples :
 - _responsive breakpoints_ are __sent by a remote server__.
 - you wants to disable some _responsive breakpoints_ in specific situation.
 
-### Usage
+### Installation
+`npm install --save guillaumearm/redux-viewport`
+
 #### Setting up store
 ```js
 import { createStore, applyMiddleware } from 'redux';
@@ -30,6 +32,7 @@ const initialState = {};
 const store = createStore(rootReducer, initialState, applyMiddleware(viewportMiddleware));
 ```
 
+### Usage
 #### Listen a single media
 ```js
 import { listenMedia } from 'redux-viewport';
