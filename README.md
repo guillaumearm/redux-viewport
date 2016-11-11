@@ -14,7 +14,9 @@ examples :
 - _responsive breakpoints_ are __sent by a remote server__.
 - you wants to disable some _responsive breakpoints_ in specific situation.
 
-### Usage
+### Installation
+`npm install --save guillaumearm/redux-viewport`
+
 #### Setting up store
 ```js
 import { createStore, applyMiddleware } from 'redux';
@@ -30,6 +32,7 @@ const initialState = {};
 const store = createStore(rootReducer, initialState, applyMiddleware(viewportMiddleware));
 ```
 
+### Usage
 #### Listen a single media
 ```js
 import { listenMedia } from 'redux-viewport';
