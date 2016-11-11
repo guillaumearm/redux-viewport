@@ -4,76 +4,104 @@ redux-viewport
 Keep the browser viewport sync with your redux state.
 
 ### Introduction
-Firs of all, if you want to do reponsive things with React and Redux, please see [redux-responsive](https://github.com/AlecAivazis/redux-responsive).
+Firs of all, if you want to do reponsive things with React and Redux, take a look at [redux-responsive](https://github.com/AlecAivazis/redux-responsive).
 
 #### When use redux-viewport ?
 __redux-viewport__ is designed to dynamically set viewport listeners in your application.
 
-example :
+examples :
 - _responsive breakpoints_ __are not the same__ between pages.
 - _responsive breakpoints_ are __sent by a remote server__.
+- you wants to disable some _responsive breakpoints_ in specific situation.
 
-#### Usage
+### Usage
+#### Setting up store
 ```js
 import { createStore, applyMiddleware } from 'redux';
-import { viewportMiddleware, viewportReducer, listenMedia, clearMedia } from 'redux-viewport';
+import { viewportMiddleware, viewportReducer } from 'redux-viewport';
 
 const rootReducer = {
     ...reducers,
-    viewport: viewportReducer,
+    viewport: viewportReducer, // this is a reducer, so you can put it everywhere you want in the state
 };
 
-const store = createStore(rootReducer, applyMiddleware(viewportMiddleware));
-const { dispatch, getState } = store;
+const initialState = {};
 
+const store = createStore(rootReducer, initialState, applyMiddleware(viewportMiddleware));
+```
+
+#### Listen a single media
+```js
+import { listenMedia } from 'redux-viewport';
+const { store, getState } = store;
 const getIsLandScape = () => getState().viewport.isLandscape;
 
 getIsLandScape() // should be undefined
 dispatch(listenMedia('isLandscape', '(orientation: landscape)'));
-getIsLandScape() // should be a boolean
+getIsLandScape() // should be a boolean value
+```
+`state.viewport.isLandscape` will be keep in sync with the browser.
 
-/*
- * state.viewport.isLandscape will be keep in sync with the browser
- * if you want to stop listening for it, you can use the clearMedia action creator.
-*/
+
+#### Stop to listen a single media
+- you can use clearMedia() action creator to stop listening media.
+
+```js
+import { clearMedia } from 'redux-viewport';
 
 dispatch(clearMedia('isLandscape'))
-getIsLandScape() // should be a boolean
+getIsLandScape() // should be undefined
+```
 
-// if you want to erase value in the store when clear a media, use the optional parameter of clearMedia()
-dispatch(clearMedia('isLandscape'), { eraseValue: true });
-getIsLandScape() // should be null
+- if you want to keep last boolean value in the store when clear a media, use the optional parameter of clearMedia()
+```js
+import { clearMedia } from 'redux-viewport';
 
+dispatch(clearMedia('isLandscape'), { keepValue: true });
+getIsLandScape() // should be a boolean value
+```
 
+#### Listen multiple media in one dispatch
+```js
+import { listenMedia } from 'redux-viewport';
 
-// you can listen more one media in one dispatch :
 dispatch(listenMedia({
     'isLandscape': '(orientation: landscape)',
     'isPortrait': '(orientation: portrait)',
 }))
-// or clear more one media :
+```
+#### Stop to listen multiple media in one dispatch
+```js
+import { clearMedia } from 'redux-viewport';
+
 dipatch(clearMedia([
     'isLandscape,'
     'isPortrait',
 ]))
 ```
+note you can use `keepValue` option here too.
 
-#### actions are [FSA compliant](https://github.com/acdlite/flux-standard-action) :
+### Actions
+__redux-viewport__ actions are [FSA compliant](https://github.com/acdlite/flux-standard-action) :
 ```js
 import { LISTEN_MEDIA, CLEAR_MEDIA } from 'redux-viewport';
 
-// listenMedia('isLandscape', '(orientation: landscape)') return
+listenMedia('isLandscape', '(orientation: landscape)');
+/* return this action
 {
     type: LISTEN_MEDIA, // @@viewport/LISTEN_MEDIA
     payload: {
         'isLandscape': '(orientation: landscape)',
     },
 }
+*/
 
-// clearMedia('isLandscape') return
+clearMedia('isLandscape');
+/* return this action
 {
     type: CLEAR_MEDIA, // @@viewport/CLEAR_MEDIA
     payload: ['isLandscape'],
     meta: { keepValue: false },
 }
+*/
 ```
