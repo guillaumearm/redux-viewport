@@ -1,7 +1,19 @@
 redux-viewport
 ===================
 
-- usage :
+Keep the browser viewport sync with your redux state.
+
+### Introduction
+Firs of all, if you want to do reponsive things with React and Redux, please see [redux-responsive](https://github.com/AlecAivazis/redux-responsive).
+
+#### When use redux-viewport ?
+__redux-viewport__ is designed to dynamically set viewport listeners in your application.
+
+example :
+- _responsive breakpoints_ __are not the same__ between pages.
+- _responsive breakpoints_ are __sent by a remote server__.
+
+#### Usage
 ```js
 import { createStore, applyMiddleware } from 'redux';
 import { viewportMiddleware, viewportReducer, listenMedia, clearMedia } from 'redux-viewport';
@@ -46,7 +58,7 @@ dipatch(clearMedia([
 ]))
 ```
 
-- actions (FSA compliant) :
+#### actions are [FSA compliant](https://github.com/acdlite/flux-standard-action) :
 ```js
 import { LISTEN_MEDIA, CLEAR_MEDIA } from 'redux-viewport';
 
