@@ -4,7 +4,7 @@ redux-viewport
 Keep the browser viewport sync with your redux state.
 
 ### Introduction
-Firs of all, if you want to do reponsive things with React and Redux, take a look at [redux-responsive](https://github.com/AlecAivazis/redux-responsive).
+First of all, if you want to do reponsive things with React and Redux, take a look at [redux-responsive](https://github.com/AlecAivazis/redux-responsive).
 
 #### When use redux-viewport ?
 __redux-viewport__ is designed to dynamically set viewport listeners in your application.
