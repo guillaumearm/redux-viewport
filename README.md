@@ -1,5 +1,6 @@
 redux-viewport
 ===================
+*__WIP__*
 
 Keep the browser viewport sync with your redux state.
 
