@@ -1,4 +1,3 @@
-/* global echo */
 require('shelljs/global');
 const execOrDie = require('./internal/execOrDie');
 

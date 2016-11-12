@@ -1,4 +1,3 @@
-/* global console module */
 /* eslint-disable no-console */
 const shelljs = require('shelljs');
 const R = require('ramda');
