@@ -108,3 +108,18 @@ clearMedia('isLandscape');
 }
 */
 ```
+The viewport middleware will dispatch UPDATE_MEDIA actions,
+you can catch them in your reducers.
+
+```js
+import { UPDATE_MEDIA } from 'redux-viewport';
+
+/*
+{
+    type: UPDATE_MEDIA, // @@viewport/UPDATE_MEDIA
+    payload: {
+        'isLandscape': true,
+    },
+}
+*/
+```
