@@ -1,5 +1,6 @@
 redux-viewport
 ===================
+*__WIP__*
 
 Keep the browser viewport sync with your redux state.
 
@@ -36,12 +37,12 @@ const store = createStore(rootReducer, initialState, applyMiddleware(viewportMid
 #### Listen a single media
 ```js
 import { listenMedia } from 'redux-viewport';
-const { store, getState } = store;
+const { dispatch, getState } = store;
 const getIsLandScape = () => getState().viewport.isLandscape;
 
-getIsLandScape() // should be undefined
+getIsLandScape() // undefined
 dispatch(listenMedia('isLandscape', '(orientation: landscape)'));
-getIsLandScape() // should be a boolean value
+getIsLandScape() // true/false
 ```
 `state.viewport.isLandscape` will be keep in sync with the browser.
 
@@ -53,7 +54,7 @@ getIsLandScape() // should be a boolean value
 import { clearMedia } from 'redux-viewport';
 
 dispatch(clearMedia('isLandscape'))
-getIsLandScape() // should be undefined
+getIsLandScape() // undefined
 ```
 
 - if you want to keep last boolean value in the store when clear a media, use the optional parameter of clearMedia()
@@ -61,7 +62,7 @@ getIsLandScape() // should be undefined
 import { clearMedia } from 'redux-viewport';
 
 dispatch(clearMedia('isLandscape'), { keepValue: true });
-getIsLandScape() // should be a boolean value
+getIsLandScape() // true/false
 ```
 
 #### Listen multiple media in one dispatch
@@ -105,6 +106,21 @@ clearMedia('isLandscape');
     type: CLEAR_MEDIA, // @@viewport/CLEAR_MEDIA
     payload: ['isLandscape'],
     meta: { keepValue: false },
+}
+*/
+```
+The viewport middleware will dispatch UPDATE_MEDIA actions,
+you can catch them in your reducers.
+
+```js
+import { UPDATE_MEDIA } from 'redux-viewport';
+
+/*
+{
+    type: UPDATE_MEDIA, // @@viewport/UPDATE_MEDIA
+    payload: {
+        'isLandscape': true,
+    },
 }
 */
 ```
