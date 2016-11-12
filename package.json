@@ -34,6 +34,7 @@
     }
   ],
   "jest": {
+    "testRegex": "(\\.(test|spec))\\.(js|jsx)$",
     "moduleFileExtensions": [
       "js",
       "jsx"
