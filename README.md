@@ -36,7 +36,7 @@ const store = createStore(rootReducer, initialState, applyMiddleware(viewportMid
 #### Listen a single media
 ```js
 import { listenMedia } from 'redux-viewport';
-const { store, getState } = store;
+const { dispatch, getState } = store;
 const getIsLandScape = () => getState().viewport.isLandscape;
 
 getIsLandScape() // should be undefined
