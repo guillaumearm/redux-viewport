@@ -12,8 +12,8 @@ __redux-viewport__ is designed to dynamically set viewport listeners in your app
 
 examples :
 - _responsive breakpoints_ __are not the same__ between pages.
-- _responsive breakpoints_ are __sent by a remote server__.
-- you wants to disable some _responsive breakpoints_ in specific situation.
+- _responsive breakpoints_ are __sent by the server__.
+- __disable some__ _responsive breakpoints_ in specific situation.
 
 ### Installation
 `npm install --save guillaumearm/redux-viewport`
@@ -22,6 +22,7 @@ examples :
 ```js
 import { createStore, applyMiddleware } from 'redux';
 import { viewportMiddleware, viewportReducer } from 'redux-viewport';
+import * as reducers from './reducers';
 
 const rootReducer = {
     ...reducers,
