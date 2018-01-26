@@ -12,8 +12,8 @@ __redux-viewport__ is designed to dynamically set viewport listeners in your app
 
 examples :
 - _responsive breakpoints_ __are not the same__ between pages.
-- _responsive breakpoints_ are __sent by the server__.
-- __disable some__ _responsive breakpoints_ in specific situation.
+- _responsive breakpoints_ are __sent by a remote server__.
+- you wants to disable some _responsive breakpoints_ in specific situation.
 
 ### Installation
 `npm install --save guillaumearm/redux-viewport`
@@ -22,7 +22,6 @@ examples :
 ```js
 import { createStore, applyMiddleware } from 'redux';
 import { viewportMiddleware, viewportReducer } from 'redux-viewport';
-import * as reducers from './reducers';
 
 const rootReducer = {
     ...reducers,
@@ -88,11 +87,8 @@ note you can use `keepValue` option here too.
 
 ### Actions
 __redux-viewport__ actions are [FSA compliant](https://github.com/acdlite/flux-standard-action) :
-
-- `@@viewport/LISTEN_MEDIA` is created by listenMedia()
-
 ```js
-import { listenMedia, LISTEN_MEDIA } from 'redux-viewport';
+import { LISTEN_MEDIA, CLEAR_MEDIA } from 'redux-viewport';
 
 listenMedia('isLandscape', '(orientation: landscape)');
 /* return this action
@@ -103,12 +99,6 @@ listenMedia('isLandscape', '(orientation: landscape)');
     },
 }
 */
-```
-
-- `@@viewport/CLEAR_MEDIA` is created by clearMedia()
-
-```js
-import { clearMedia, CLEAR_MEDIA } from 'redux-viewport';
 
 clearMedia('isLandscape');
 /* return this action
@@ -119,8 +109,7 @@ clearMedia('isLandscape');
 }
 */
 ```
-
-- `@@viewport/UPDATE_MEDIA` is dispatched by the viewport middleware,
+The viewport middleware will dispatch UPDATE_MEDIA actions,
 you can catch them in your reducers.
 
 ```js
@@ -135,9 +124,3 @@ import { UPDATE_MEDIA } from 'redux-viewport';
 }
 */
 ```
-
------------------
-
-### Contributing
-Feel free to contribute.
-please see [CONTRIBUTING.MD](https://github.com/guillaumearm/redux-viewport/blob/master/CONTRIBUTING.md)
